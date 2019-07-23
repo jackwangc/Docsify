@@ -72,45 +72,65 @@
       // 使得我们将元素放入哈希表的时候增加了一定的随机性
       static final int hash(Object key) {
          int h;
-         return (key == null) ? 0 : (h = key.hashCode()) ^ (h >>> 16); // 增加随机性较少碰撞冲突的可能性
+         // 增加随机性较少碰撞冲突的可能性
+         return (key == null) ? 0 : (h = key.hashCode()) ^ (h >>> 16); 
       }
    ```
-```java
-/*hashMap 建立过程
-*/
-// 1. 存储结构-链表
-    Entry(int h, K k, V v, Entry<K,V> n) {
-        value = v;
-        next = n;
-        key = k;
-        hash = h;
-    }
-// 3. 初始化
-// 初始容量为16，装载因子默认为0.75，最大容量 2的31次方
+8. hashMap 建立过程
+   ```java
+   // 1. 存储结构-链表
+      Entry(int h, K k, V v, Entry<K,V> n) {
+         value = v;
+         next = n;
+         key = k;
+         hash = h;
+      }
+   // 3. 初始化
+   // 初始容量为16，装载因子默认为0.75，最大容量 2的31次方
 
-// 2. put 操作,实际上是对拉链法工作原理的实现
+   // 2. put 操作,实际上是对拉链法工作原理的实现
 
-// 3. 新建
+   // 3. 新建
 
-// 新建一个 HashMap，默认大小为 16；
-// 插入 <K1,V1> 键值对，先计算 K1 的 hashCode 为 115，使用除留余数法得到所在的桶下标 115%16=3。
-// 插入 <K2,V2> 键值对，先计算 K2 的 hashCode 为 118，使用除留余数法得到所在的桶下标 118%16=6。
-// 插入 <K3,V3> 键值对，先计算 K3 的 hashCode 为 118，使用除留余数法得到所在的桶下标 118%16=6，插在 <K2,V2> 前面。
+   // 新建一个 HashMap，默认大小为 16；
+   // 插入 <K1,V1> 键值对，先计算 K1 的 hashCode 为 115，使用除留余数法得到所在的桶下标 115%16=3。
+   // 插入 <K2,V2> 键值对，先计算 K2 的 hashCode 为 118，使用除留余数法得到所在的桶下标 118%16=6。
+   // 插入 <K3,V3> 键值对，先计算 K3 的 hashCode 为 118，使用除留余数法得到所在的桶下标 118%16=6，插在 <K2,V2> 前面。
 
-// 4. get 操作
-// 计算键值对所在的桶；
-// 在链表上顺序查找，时间复杂度显然和链表的长度成正比
-// 链表的插入是以头插法方式进行的
+   // 4. get 操作
+   // 计算键值对所在的桶；
+   // 在链表上顺序查找，时间复杂度显然和链表的长度成正比
+   // 链表的插入是以头插法方式进行的
 
-// 5. 扩容
-// resize() 方法，扩容操作同样需要把 oldTable 的所有键值对重新插入 newTable 中，因此这一步是很费时的。
-// 当传入的数组容量不是 2 的 n 次方时，自动将容量转为2的n次
+   // 5. 扩容
+   // resize() 方法，扩容操作同样需要把 oldTable 的所有键值对重新插入 newTable 中，因此这一步是很费时的。
+   // 当传入的数组容量不是 2 的 n 次方时，自动将容量转为2的n次
+   ```
 
-```
+## ConcurrentHashMap
+
+1. JDK1.7 中，ConcurrentHashMap 采用 Segment + HashEntry 的方式进行实现
+   1. 前者用来封装映射表的键值对，后者用来充当锁的角色
+   2. Segment 是一种可重入的锁 ReentrantLock，每个 Segment 守护一个 HashEntry 数组里得元素
+   3. 当对 HashEntry 数组的数据进行修改时，必须首先获得对应的 Segment 锁
+2. JDK1.8 中，采用 Node + CAS + Synchronized 来保证并发安全进行实现，
+
+### ConcurrentHashMap 实现
+
+1. `get` 不用加锁，非阻塞的，因为 node 结点被 volite 关键字修饰，每次获取的都是最新的值。
+2. `put` 方法
+   1. 桶位置的 Node 还没有初始化，则调用 CAS 插入相应的数据
+   2. 相应位置的 Node 不为空，且当前该节点不处于移动状态，则对该节点加 synchronized 锁，如果该节点的 hash 不小于 0，则遍历链表更新节点或插入新节点
+   3. 如果该节点是 TreeBin 类型的节点，说明是红黑树结构，则通过 putTreeVal 方法往红黑树中插入节点
+3. 底层结构是散列表(数组+链表)+红黑树，这一点和 HashMap 是一样的。
+4. Hashtable 是将所有的方法进行同步，效率低下。而 ConcurrentHashMap 作为一个高并发的容器，它是通过部分锁定+CAS算法来进行实现线程安全的。CAS 算法也可以认为是乐观锁的一种
+5. ConcurrentHashMap 的 key 和 Value 都不能为 null
+
 
 ## hashTable
 
-HashMap 和HashTable 的区别
+### HashMap 和 HashTable 的区别
+
 不同点 | HashMap | HashTable
 ---|---|---
 数据结构 | 数组+链表+红黑树 | 数组 + 链表
@@ -200,6 +220,7 @@ for(Integer value : map.values()){
 
 1. [hashMap](https://mp.weixin.qq.com/s?__biz=MzI4Njg5MDA5NA==&mid=2247484139&idx=1&sn=bb73ac07081edabeaa199d973c3cc2b0&chksm=ebd743eadca0cafc532f298b6ab98b08205e87e37af6a6a2d33f5f2acaae245057fa01bd93f4#rd)
 2. [原理和源码解析](https://www.cnblogs.com/chengxiao/p/6059914.html)
+3. [集合知识点总结](https://mp.weixin.qq.com/s/YdWGtT1A76FrXtlWs8U6Dw) **精华**
 
 
 
