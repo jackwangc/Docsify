@@ -25,11 +25,11 @@
 ## Collection
 
 1. Collection
-   1. [List](List.md)
+   1. List
       1. ArrayList
       2. Vector
       3. LinkedList 
-   2. [Set](set.md) 
+   2. Set
       1. HashSet
       2. TreeSet
 2. Collection 是集合的父类，具有如下方法
