@@ -15,7 +15,8 @@ public class Main {
         // 线程的几种状态 1. 新建 2. 可运行 3. 阻塞 4. 无限期等待 5. 限期等待 6. 死亡
         A aa = new A("jack");
         // 2. 基础线程机制
-        ExecutorService executorService = Executors.newCachedThreadPool(); // CachedThreadPool：一个任务创建一个线程；FixedThreadPool：所有任务只能使用固定大小的线程
+        // CachedThreadPool：一个任务创建一个线程；FixedThreadPool：所有任务只能使用固定大小的线程
+        ExecutorService executorService = Executors.newCachedThreadPool(); 
         Thread aat = new Thread(aa);
         executorService.execute(aat);
         A bb = new A("rose");
