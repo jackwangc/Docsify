@@ -54,3 +54,6 @@
 
 1. [面试题目](javaBasicKnowledge/面试问题.md)
 2. [必备算法](javaBasicKnowledge/常用算法.md)
+3. [面经汇总](javaBasicKnowledge/面经汇总/面经汇总.md)
+4. [优秀文章](javaBasicKnowledge/技术文章汇总.md)
+5. [常考知识点](javaBasicKnowledge/打印/必记知识点.md)
