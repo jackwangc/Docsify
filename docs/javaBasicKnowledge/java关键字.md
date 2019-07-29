@@ -59,3 +59,9 @@
 3. Synchronized是非公平锁。 Synchronized在线程进入ContentionList时，等待的线程会先 尝试自旋获取锁，如果获取不到就进入 ContentionList，这明显对于已经进入队列的线程是 不公平的，还有一个不公平的事情就是自旋获取锁的线程还可能直接抢占 OnDeck 线程的锁 资
 4. 核心组件
 
+## finalize()
+
+> finalize()是Object的protected方法，子类可以override实现资源清理工作，GC在回收对象之前调用该方法。
+> 增加收尾功能，其实就是如果一个对象正在处理的是非Java 资源，如文件句柄或window 字符字体，这时你要确认在一个对象被撤消以前要保证这些资源被释放。（其他资源的释放）
+> 不建议用finalize方法完成“非内存资源”的清理工作，但建议用于：① 清理本地对象(通过JNI创建的对象)；在finalize方法中显式调用其他资源释放方法
+

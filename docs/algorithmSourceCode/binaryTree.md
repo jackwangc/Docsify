@@ -316,8 +316,8 @@ class tree {
 
 ## **参考链接**
 1. [二叉树](https://blog.csdn.net/u012428012/article/details/79089915)
-2. [b 树为什么](https://mp.weixin.qq.com/s/gaHC7MfFcsiN7N7-gOR9xw)
-3. [b树介绍](https://mp.weixin.qq.com/s/3cqdS3n5BTJLLPZwj6bzvQ)
+2. [MySQL数据库为何要用B+树存储索引](https://mp.weixin.qq.com/s/gaHC7MfFcsiN7N7-gOR9xw)
+3. [数据库索引的底层原理](https://mp.weixin.qq.com/s/3cqdS3n5BTJLLPZwj6bzvQ)
 
 
 
