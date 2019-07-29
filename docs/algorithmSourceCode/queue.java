@@ -6,9 +6,9 @@ import sun.security.krb5.internal.KDCOptions;
  * 简单队列
  */
 class queue{
-    
+    // 存储内容
     private List<Integer> data;
-
+    // 维护数组的出队顺序
     private int p_start;
 
     public queue() {
@@ -35,7 +35,6 @@ class queue{
     public boolean isEmpty() {
         return p_start >= data.size();
     }
-
 }
 
 /**
@@ -93,9 +92,7 @@ class circularQueue {
     }
     public boolean isFull() {
         return ((tail+1)%size) == head;
-    }
-
-    
+    }   
 }
 /**
  * 内置队列用法

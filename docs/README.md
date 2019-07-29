@@ -61,3 +61,8 @@
 ## 6. 数据库
 
 * [数据库](dataBase\mysql.md)
+
+## 7. 刷题
+
+1. [常见面试算法题](https://yq.aliyun.com/articles/40478)
+2. [常见数据结构实现](sum-alg/design.md)
