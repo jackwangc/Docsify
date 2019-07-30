@@ -65,3 +65,16 @@
 > 增加收尾功能，其实就是如果一个对象正在处理的是非Java 资源，如文件句柄或window 字符字体，这时你要确认在一个对象被撤消以前要保证这些资源被释放。（其他资源的释放）
 > 不建议用finalize方法完成“非内存资源”的清理工作，但建议用于：① 清理本地对象(通过JNI创建的对象)；在finalize方法中显式调用其他资源释放方法
 
+## 比较器
+
+> 分为两种 (Comparable、Comparator)
+1. Comparable
+   * 类实现实现 `Comparable` 接口, 重写 `compareTo` 方法
+   * 调用 `Arrays.sort(arr)` 进行排序
+2. Comparator
+   * 自定义比较器 ，自定义比较类实现 `Comparator` 接口
+   * 调用 `Collections.sort(list,new MyComparator())` 进行排序
+
+3. 原理：二叉树排序？
+4. jdk8 排序  `Collections.sort(names, (s1, s2) -> s1.compareTo(s2));`
+

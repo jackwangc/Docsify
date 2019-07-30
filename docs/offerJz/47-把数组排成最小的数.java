@@ -14,9 +14,9 @@ public class Solution{
         // 1. lambdas 表达式
         // 2. jdk8 Collections.sort(names, (s1, s2) -> s1.compareTo(s2));
         Arrays.sort(nums, (s1, s2) -> (s1 + s2).compareTo(s2 + s1));
-        String ret = "";
+        StringBuilder sb = new StringBuilder();
         for (String str : nums)
-            ret += str;
-        return ret;
+            sb.append(str);
+        return sb.toString();
     }
 }

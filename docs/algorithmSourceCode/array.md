@@ -290,4 +290,4 @@ public int solution(int[] arr,int key){
 6. [连续子数组的最大和](../offerJz/45-连续子数组的最大和.java)
 7. [把数组排成最小的数](../offerJz/47-把数组排成最小的数.java)
 8. [数组中第 k 个最大元素](../leetCode/215-数组中第k个最大的元素.java)
-9. [前k个高频元素]()
+9. [前k个高频元素](../leetCode/347-前k个高频元素.java)
