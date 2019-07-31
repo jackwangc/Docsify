@@ -5,7 +5,7 @@ public class Solution
 { 
     // 双指针法 
     // 1. 利用数学公式 
-    // x+y+z = 2(x+y) z 相遇点到环交点的位置 x 起始点到环交点的位置 y 环交点到相遇点的位置
+    // "2(x + y) = x + y + z + y => x = z " z 相遇点到环交点的位置 x 起始点到环交点的位置 y 环交点到相遇点的位置
     public ListNode solution(ListNode node){
         if (node == null || node.next == null)
             return null;
