@@ -67,3 +67,5 @@
 1. [常见面试算法题](https://yq.aliyun.com/articles/40478)
 2. [常见数据结构实现](sum-alg/design.md)
 3. [数组题目](sum-alg/array.md)
+4. [链表题目](sum-alg/linkedList.md)
+5. [字符串题目](sum-alg/string.md)

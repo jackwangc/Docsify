@@ -6,7 +6,6 @@
  */
 import java.util.ArrayList;
 
-import com.sun.xml.internal.bind.v2.schemagen.xmlschema.List;
 public class Solution {
     /**
      * 使用递归，非递归（字典序法，后序研究）

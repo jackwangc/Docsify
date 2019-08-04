@@ -36,11 +36,17 @@
 
 * [两个链表第一个公共结点](https://www.nowcoder.com/practice/6ab1d9a29e88450685099d45c9e31e46?tpId=13&tqId=11189&tPage=1&rp=1&ru=/ta/coding-interviews&qru=/ta/coding-interviews/question-ranking)
 
-## leetcode
+### 1.7 二叉搜索树和链表
+
+> 递归的活用 二叉树的遍历
+
+* [二叉搜索树和链表](https://www.nowcoder.com/practice/947f6eb80d944a84850b0538bf0ec3a5?tpId=13&tqId=11179&tPage=1&rp=1&ru=/ta/coding-interviews&qru=/ta/coding-interviews/question-ranking)
+  
+## 2. leetcode
 
 ### 2.1 合并 k 个排序链表 ⭐⭐⭐
 
 > 优先队列，递归，排序算法的运用
 > 先两两合并，再结合再一块，归并思想
 
-* 合并 k 个排序链表
+* [合并 k 个排序链表](https://leetcode-cn.com/problems/merge-k-sorted-lists/)
