@@ -49,14 +49,16 @@
 ## 4. 网络
 
 1. [网络](network/network.md)
+2. [io](network/io.md)
 
 ## 5. 面试
 
 1. [面试题目](javaBasicKnowledge/面试问题.md)
 2. [必备算法](javaBasicKnowledge/常用算法.md)
-3. [面经汇总](javaBasicKnowledge/面经汇总/面经汇总.md)
-4. [优秀文章](javaBasicKnowledge/技术文章汇总.md)
-5. [常考知识点](javaBasicKnowledge/打印/必记知识点.md)
+3. [面经汇总](面经汇总/面经汇总.md)
+4. [面经汇总2](面经汇总/面经总结.md)
+5. [优秀文章](javaBasicKnowledge/技术文章汇总.md)
+6. [常考知识点](javaBasicKnowledge/打印/必记知识点.md)
 
 ## 6. 数据库
 
@@ -69,3 +71,4 @@
 3. [数组题目](sum-alg/array.md)
 4. [链表题目](sum-alg/linkedList.md)
 5. [字符串题目](sum-alg/string.md)
+6. [数学题目](sum-alg/math.md)

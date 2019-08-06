@@ -50,11 +50,23 @@
 
 * [前 k 个高频元素](https://leetcode-cn.com/problems/top-k-frequent-elements/)
 
-### 2.3 第 k 大的数
+### 2.3 第 k 大的数 ⭐
 
 > 构建三个变量，进行比较存储
 
 * [第三大的数](https://leetcode-cn.com/problems/third-maximum-number/)
+
+### 2.4 字典序排数 ⭐⭐⭐
+
+> 递归
+
+* [字典序排数](https://leetcode-cn.com/problems/lexicographical-numbers/solution/javajie-fa-by-liu-jia-liang-4/)
+
+### 2.5 x 的平方根 ⭐⭐⭐
+
+> 二分查找
+
+* [x 的平方根](https://leetcode-cn.com/problems/sqrtx/solution/)
 
 ---
 
