@@ -24,8 +24,8 @@ public class Solution {
         for(int i= inStart; i<=inEnd ; i++){
             if (in[i]==pre[preStart]){ // 结点相等的地方 是 左右字树的分割位置
                 // 新建下一轮的结点
-                root.left = reConstructBTree( pre,preStart+1,preStart+i-inStart,in,inStart,i-1);
-                root.right = reConstructBTree( pre,i+preStart-inStart+1, preEnd,in,i+1,inEnd);
+                root.left = reConstructBTree( pre,preStart + 1,preStart + i - inStart, in, inStart, i-1);
+                root.right = reConstructBTree( pre,preStart + 1 + i -inStart , preEnd, in, i + 1, inEnd);
             }
             
         }

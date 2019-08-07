@@ -16,16 +16,24 @@ public class TreeLinkNode {
 public class Solution {
     public TreeLinkNode GetNext(TreeLinkNode pNode)
     {
-        if(pNode == null)
-            return null ;
-        if(pNode.right != null){
-                pNode = pNode.right ;
-                 
-                while(pNode.left != null){
-                    pNode = pNode.left ;
+        // 分为两种情况
+        // 1. 右子树不为空，找到右子树的最左结点
+        if (pNode.right != null) {
+            TreeLinkNode node = pNode.right;
+            while (node.left != null){
+                node = node.left;
+            }
+            return node;
+        }else{
+            // 右子树为空，找到第一个左节点包含该节点的树
+            while (pNode.next != null) {
+                TreeLinkNode parent = pNode.next;
+                if (parent.next == pNode) {
+                    return parent;
                 }
-                return pNode ;
+                pNode = pNode.next;
+            }
         }
-        return null ;
+        return null;
     }
 }
