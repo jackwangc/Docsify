@@ -10,12 +10,13 @@ public class Main {
     public static void main(String[] args) {
         // 1. 创建线程的三种方式
         // 继承 thread 类
-        // 实现 Runnable 接口，实现 callable 接口
+        // 实现 Runnable 接口，重写 run 方法；实现 callable 接口，重写 call 方法
         // 尽量选择 runnable , java 不支持多继承，继承整个类开销过大
+        // Callable 有返回值，Runnable 没有返回值
         // 线程的几种状态 1. 新建 2. 可运行 3. 阻塞 4. 无限期等待 5. 限期等待 6. 死亡
         A aa = new A("jack");
         // 2. 基础线程机制
-        // CachedThreadPool：一个任务创建一个线程；FixedThreadPool：所有任务只能使用固定大小的线程
+        // CachedThreadPool：一个任务创建一个线程，无限线程池；FixedThreadPool(size)：所有任务只能使用固定大小的线程；SingleThreadExecutor()：单个线程的线程池；
         ExecutorService executorService = Executors.newCachedThreadPool(); 
         Thread aat = new Thread(aa);
         executorService.execute(aat);

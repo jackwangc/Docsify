@@ -211,7 +211,16 @@ MVCC简介
 6. `order by` 排序
 7. `limit` 限制取出哪些数据
 8. `distinct` 过滤重复数据
-9. 
+
+## 锁
+
+> 行级锁(INNODB引擎)、表级锁(MYISAM引擎),InnoDB支持行级锁(row-level locking)和表级锁,默认为行级锁,MyISAM和MEMORY采用表级锁(table-level locking)
+
+1. InnoDB行锁是通过给索引上的索引项加锁来实现的。
+2. InnoDB这种行锁实现特点意味着：只有通过索引条件检索数据，InnoDB才使用行级锁，否则，InnoDB将使用表锁！
+3. 发生死锁后，InnoDB一般都可以检测到，并使一个事务释放锁回退，另一个获取锁完成事务。
+4. MyISAM中是不会产生死锁的，因为MyISAM总是一次性获得所需的全部锁，要么全部满足，要么全部等待。而在InnoDB中，锁是逐步获得的，就造成了死锁的可能。
+5. 
 
 ## 参考
 
