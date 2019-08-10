@@ -220,7 +220,17 @@ MVCC简介
 2. InnoDB这种行锁实现特点意味着：只有通过索引条件检索数据，InnoDB才使用行级锁，否则，InnoDB将使用表锁！
 3. 发生死锁后，InnoDB一般都可以检测到，并使一个事务释放锁回退，另一个获取锁完成事务。
 4. MyISAM中是不会产生死锁的，因为MyISAM总是一次性获得所需的全部锁，要么全部满足，要么全部等待。而在InnoDB中，锁是逐步获得的，就造成了死锁的可能。
-5. 
+
+### 使用行锁
+
+```sql
+# 1、表中创建索引， select 。。。 where   字段（必须是索引）  不然行锁就无效。
+START TRANSACTION; 
+# 2、必须要有事务，这样才是 行锁（排他锁）
+# 3、在select  语句后面 加 上  FOR UPDATE；
+SELECT UserID,Password,Age FROM AccountsDB.Accounts_InFo    WHERE Accounts = 'hello2' FOR UPDATE;
+COMMIT;
+```
 
 ## 参考
 
