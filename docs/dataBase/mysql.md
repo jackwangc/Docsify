@@ -224,13 +224,41 @@ MVCC简介
 ### 使用行锁
 
 ```sql
-# 1、表中创建索引， select 。。。 where   字段（必须是索引）  不然行锁就无效。
+-- 1、表中创建索引， select 。。。 where   字段（必须是索引）  不然行锁就无效。
 START TRANSACTION; 
-# 2、必须要有事务，这样才是 行锁（排他锁）
-# 3、在select  语句后面 加 上  FOR UPDATE；
+-- 2、必须要有事务，这样才是 行锁（排他锁）
+-- 3、在select  语句后面 加 上  FOR UPDATE；
 SELECT UserID,Password,Age FROM AccountsDB.Accounts_InFo    WHERE Accounts = 'hello2' FOR UPDATE;
 COMMIT;
 ```
+
+## 数据库使用
+
+```sql
+-- 1. 设计表, 分析需求，画出er图，用例图
+--    er 图：实体，属性，关系
+-- 2. 创建使用数据库
+drop database if exists tmall_ssm;
+create table;
+
+create table user (
+    id int not null auto_increment,
+    name varchar(255) default null,
+    -- 2.1 主键建立
+    primary key(id)
+    -- 2.2 设置存储引擎
+) engine = Innodb default charset = utf8;
+
+CREATE TABLE property (
+  id int(11) NOT NULL AUTO_INCREMENT,
+  cid int(11) DEFAULT NULL,
+  name varchar(255) DEFAULT NULL,
+  PRIMARY KEY (id),
+  -- 2.3 建立
+  CONSTRAINT fk_property_category FOREIGN KEY (cid) REFERENCES category (id)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+```
+
 
 ## 参考
 
