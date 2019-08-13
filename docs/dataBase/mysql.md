@@ -221,43 +221,64 @@ MVCC简介
 3. 发生死锁后，InnoDB一般都可以检测到，并使一个事务释放锁回退，另一个获取锁完成事务。
 4. MyISAM中是不会产生死锁的，因为MyISAM总是一次性获得所需的全部锁，要么全部满足，要么全部等待。而在InnoDB中，锁是逐步获得的，就造成了死锁的可能。
 
-### 使用行锁
+### 锁分类
+
+1. 表锁：
+  * 开销小，加锁快；不会出现死锁；锁定力度大，发生锁冲突概率高，并发度最低
+2. 行锁：
+  * 开销大，加锁慢；会出现死锁；锁定粒度小，发生锁冲突的概率低，并发度高
+3. 页锁：
+  * 开销和加锁速度介于表锁和行锁之间；会出现死锁；锁定粒度介于表锁和行锁之间，并发度一般
+
+### 表锁
+
+1. 悲观锁
+  * = 排他锁
+  * 程序A在查询库存数时使用排他锁（select * from table where id=10 for update）
+  * 然后进行后续的操作，包括更新库存数，最后提交事务。
+  * 程序B在查询库存数时，如果A还未释放排他锁，它将等待
+  
+2. 乐观锁
+  * 一般是在该商品表添加version版本字段或者timestamp时间戳字段
+3. 区别
+   
+```sql
+-- MyISAM 在执行查询语句（SELECT）前，会自动给涉及的所有表加读锁，在执行更新操作（UPDATE、DELETE、INSERT等）前，会自动给涉及的表加写锁
+-- 表锁使用，读锁，写锁
+Lock tables table1_name read local,table2_name read local;
+select sum(colounm) from table1_name;
+select sum(colounm) from table2_name;
+Unlock tables;
+```
+
+### 行锁
+
+1. 共享锁 (读锁)
+  * 对某一资源加共享锁，自身可以读该资源，其他人也可以读该资源（也可以再继续加共享锁，即 共享锁可多个共存），但无法修改
+2. 排他锁 (写锁)
+  * 对某一资源加排他锁，自身可以进行增删改查，其他人无法进行任何操作
 
 ```sql
 -- 1、表中创建索引， select 。。。 where   字段（必须是索引）  不然行锁就无效。
 START TRANSACTION; 
 -- 2、必须要有事务，这样才是 行锁（排他锁）
--- 3、在select  语句后面 加 上  FOR UPDATE；
-SELECT UserID,Password,Age FROM AccountsDB.Accounts_InFo    WHERE Accounts = 'hello2' FOR UPDATE;
+-- 3、在select  语句后面 加 上  FOR UPDATE；排他锁
+SELECT UserID,Password,Age FROM AccountsDB.Accounts_InFo WHERE Accounts = 'hello2' FOR UPDATE;
+-- 4、共享锁
+SELECT * FROM table_name WHERE ... LOCK IN SHARE MODE
 COMMIT;
 ```
 
-## 数据库使用
+### mvcc 多版本并发控制
 
-```sql
--- 1. 设计表, 分析需求，画出er图，用例图
---    er 图：实体，属性，关系
--- 2. 创建使用数据库
-drop database if exists tmall_ssm;
-create table;
+1. 多版本并发控制（MVCC）是一种用来解决读-写冲突的无锁并发控制
+   1. 为事务分配单向增长的时间戳，为每个修改保存一个版本，版本与事务时间戳关联，读操作只读该事务开始前的数据库的快照。 
+   2. 这样在读操作不用阻塞写操作，写操作不用阻塞读操作的同时，避免了脏读和不可重复读
+2. 乐观并发控制（OCC）是一种用来解决写-写冲突的无锁并发控制
+   1. 认为事务间争用没有那么多，所以先进行修改
+   2. 在提交事务前，检查一下事务开始后，有没有新提交改变，如果没有就提交，如果有就放弃并重试。
+   3. 乐观并发控制类似自选锁。乐观并发控制适用于低数据争用，写冲突比较少的环境。
 
-create table user (
-    id int not null auto_increment,
-    name varchar(255) default null,
-    -- 2.1 主键建立
-    primary key(id)
-    -- 2.2 设置存储引擎
-) engine = Innodb default charset = utf8;
-
-CREATE TABLE property (
-  id int(11) NOT NULL AUTO_INCREMENT,
-  cid int(11) DEFAULT NULL,
-  name varchar(255) DEFAULT NULL,
-  PRIMARY KEY (id),
-  -- 2.3 建立
-  CONSTRAINT fk_property_category FOREIGN KEY (cid) REFERENCES category (id)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-```
 
 
 ## 参考
