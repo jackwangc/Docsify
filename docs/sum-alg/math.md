@@ -12,7 +12,10 @@
 
 ### 2.1 两数相除 ⭐⭐⭐
 
-* 两数相除
+> 减少运算次数
+> 位运算左移，相当于 n * 2
+
+* [两数相除](https://leetcode-cn.com/problems/divide-two-integers/)
 
 ### 2.2 字符串相乘 ⭐⭐⭐
 

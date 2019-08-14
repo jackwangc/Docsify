@@ -31,10 +31,12 @@ class Solution {
         
         for(int i = n1; i >= 0; --i) {
             for(int j = n2; j >= 0; --j) {
+                // 难点 下标的判断
                 int bitmul = (num1.charAt(i)-'0') * (num2.charAt(j)-'0');      
                 bitmul += mul[i+j+1]; // 先加低位判断是否有新的进位
-                
+                // 进位
                 mul[i+j] += bitmul / 10;
+                // 当前位
                 mul[i+j+1] = bitmul % 10;
             }
         }

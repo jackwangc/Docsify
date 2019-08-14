@@ -20,6 +20,7 @@
 // 2       8 (4 <<= 1)  退出循环
 
 // 则12/2商为 4 + 2 = 6。通过此算法，共减少了3次加法运算。
+// 除法的本质，被除数里面包含多少个这样的数
 public class Solution {
     public int divide(int dividend, int divisor) {
         long a = Math.abs((long)dividend);
@@ -31,9 +32,12 @@ public class Solution {
         int ret = 0;
         // 这里必须是= 因为相等时也可以减
         while (a >= b) {
-            // 判断条件是 >=
+            // cnt 减去的个数
+            // 判断条件，不能再减的时候，还原 除数的值重新循环
             for (long deduce = b, cnt = 1; a >= deduce; deduce <<= 1, cnt <<= 1) {
+                // 余数减去
                 a -= deduce;
+                // 统计减去的个数
                 ret += cnt;
             }
         }
