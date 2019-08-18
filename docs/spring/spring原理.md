@@ -68,7 +68,6 @@
    1. 可以在运行期扩展 Java 类与实现 Java 接口
    2. JDK 创建代理有一个限制，就是只能为接口创建代理实例
 
-
 ### 1.3 常用注解
 
 1. `@Controller`
@@ -108,7 +107,19 @@
     * 字段注解
 17. `@TableId`
     * 主键注解
-  
+
+### 1.4 spring 多线程
+
+1. 在控制器中不使用实例变量
+2. 将控制器的作用域从单例改为原型，即在spring配置文件Controller中声明 scope="prototype"，每次都创建新的controller
+3. 在Controller中使用ThreadLocal变量
+4. web容器本身就是多线程的，每一个HTTP请求都会产生一个独立的线程（或者从线程池中取得创建好的线程）；
+5. Spring中的bean（用@Repository、@Service、@Component和@Controller注册的bean）都是单例的，即整个程序、所有线程共享一个实例；
+6. 虽然bean都是单例的，但是Spring提供的模板类（XXXTemplate），在Spring容器的管理下（使用@Autowired注入），会自动使用ThreadLocal以实现多线程；
+7. 即类是单例的，但是其中有可能出现并发问题的变量使用ThreadLocal实现了多线程。
+8. 注意除了Spring本身提供的类以外，在Bean中定义“有状态的变量”（即有存储数据的变量），其会被所有线程共享，很可能导致并发问题，需要自行另外使用ThreadLocal进行处理，或者将Bean声明为prototype型。
+9. 一个类中的方法实际上是独立，方法内定义的局部变量在每次调用方法时都是独立的，不会有并发问题。只有类的“有状态的”全局变量会有并发问题
+
 ## 2. spring mvc 原理
 
 ![流程图](../picture/springmvc流程.png)
@@ -255,9 +266,23 @@ Category c= session.selectOne("getCategory",3);
    1. 当容器启动时，会读取在webapps目录下所有的web应用中的web.xml文件，然后对 xml文件进行解析，并读取servlet注册信息。
    2. 然后，将每个应用中注册的servlet类都进行加载，并通过 反射的方式实例化。（有时候也是在第一次请求时实例化）
    3. 在servlet注册时加上1如果为正数，则在一开始就实例化，如果不写或为负数，则第一次请求实例化。
-  
+ 
 ### 5.3 面试题
 
 * [tomcat面试题](https://juejin.im/post/5a75ab4b6fb9a063592ba9db)
 
+### 5.4 多线程
+
+1. Servlet采用多线程来处理多个请求同时访问。servlet依赖于一个线程池来服务请求。线程池实际上是一系列的工作者线程集合。Servlet使用一个调度线程来管理工作者线程。     
+2. 当容器收到一个Servlet请求，调度线程从线程池中选出一个工作者线程,将请求传递给该工作者线程，然后由该线程来执行Servlet的service方法。
+3. 当这个线程正在执行的时候,容器收到另外一个请求,调度线程同样从线程池中选出另一个工作者线程来服务新的请求,容器并不关心这个请求是否访问的是同一个Servlet.
+4. 当容器同时收到对同一个Servlet的多个请求的时候，那么这个Servlet的service()方法将在多线程中并发执行。
+5. Servlet容器默认采用单实例多线程的方式来处理请求，这样减少产生Servlet实例的开销，提升了对请求的响应时间
+6. 对于Tomcat可以在server.xml中通过<Connector>元素设置线程池中线程的数目。
+7. 实现servlet 的并发安全
+   1. 实现 singleThredModel 接口，使得线程不能被两个线程同时执行
+   2. 同步对共享数据的操作,加锁
+   3. 避免使用实例变量，使用 threadLocal
+
 ## 6. ngix
+
