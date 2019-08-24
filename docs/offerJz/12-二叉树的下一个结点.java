@@ -28,7 +28,7 @@ public class Solution {
             // 右子树为空，找到第一个左节点包含该节点的树
             while (pNode.next != null) {
                 TreeLinkNode parent = pNode.next;
-                if (parent.next == pNode) {
+                if (parent.left == pNode) {
                     return parent;
                 }
                 pNode = pNode.next;
