@@ -20,6 +20,6 @@ public class Solution {
         if (Math.abs(left - right) > 1) {
             res = false;
         }
-        return Math.max(left, right);
+        return Math.max(left, right) + 1;
     }
 }

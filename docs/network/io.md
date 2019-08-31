@@ -55,7 +55,7 @@ BIO 和 NIO 都是同步的 IO 模型，即同步阻塞 IO 和同步非阻塞 IO
 
 ### 非阻塞 IO（NIO）
 
-同时支持阻塞与非阻塞模式，但主要是使用同步非阻塞 IO。
+同时支持阻塞与非阻塞模式，但主要是使用同步非阻塞 IO。底层由 epoll 实现
 
 NIO （New I/O）：NIO 的做法是叫一个线程不断的轮询每个水壶的状态，看看是否有水壶的状态发生了改变，从而进行下一步的操作。
 
@@ -88,6 +88,9 @@ AIO （ Asynchronous I/O）：为每个水壶上面装了一个开关，水烧�
    1. 数据读取从通道开始进行
    2. 创建缓冲区，然后利用通道进行读取操作 
 
+## select poll epoll 区别
+
+
 ---
 
 ## 参考
@@ -95,3 +98,4 @@ AIO （ Asynchronous I/O）：为每个水壶上面装了一个开关，水烧�
 1. [nio解析](https://zhuanlan.zhihu.com/p/23488863)
 2. [nio,bio,aio](https://blog.csdn.net/m0_38109046/article/details/89449305)
 3. [nio 详解](https://blog.csdn.net/qq_28261343/article/details/52769969)
+4. [slelect epoll 详解](https://www.jianshu.com/p/dfd940e7fca2) **区别**

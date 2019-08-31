@@ -221,6 +221,7 @@ for(Integer value : map.values()){
 1. [hashMap](https://mp.weixin.qq.com/s?__biz=MzI4Njg5MDA5NA==&mid=2247484139&idx=1&sn=bb73ac07081edabeaa199d973c3cc2b0&chksm=ebd743eadca0cafc532f298b6ab98b08205e87e37af6a6a2d33f5f2acaae245057fa01bd93f4#rd)
 2. [原理和源码解析](https://www.cnblogs.com/chengxiao/p/6059914.html)
 3. [集合知识点总结](https://mp.weixin.qq.com/s/YdWGtT1A76FrXtlWs8U6Dw) **精华**
+4. [concurrentHashMap扩容](https://kkewwei.github.io/elasticsearch_learning/2017/11/14/ConcurrentHashMap%E6%89%A9%E5%AE%B9%E8%BF%87%E7%A8%8B%E4%BB%8B%E7%BB%8D/)
 
 
 

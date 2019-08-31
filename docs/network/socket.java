@@ -1,3 +1,5 @@
+import java.net.ServerSocket;
+
 /**
  * 参考链接 [https://mp.weixin.qq.com/s/UD5S-MTF4ic6NZmW4ZZaxQ]
  * udp编程
@@ -99,5 +101,15 @@ public class TCPServer {
         //5.关闭流
         socket.close();
         serverSocket.close();
+    }
+    public static void solution() {
+        //1.创建服务端Socket并明确端口号
+        ServerSocket serverSocket = new ServerSocket(10000);
+        //2.获取到客户端的Socket
+        Socket socket = serverSocket.accept();
+        while (true) {
+            Socket sockets = serverSocket.accept();
+            new Thread(num(sockets)).start(); // 多线程方法
+        }
     }
 }
