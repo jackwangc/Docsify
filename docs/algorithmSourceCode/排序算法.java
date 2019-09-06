@@ -26,7 +26,7 @@ class ArraySort {
             }
             // 判断优化
             if (flag) {
-                break;
+               
             }
         }
         return array;  

@@ -2,7 +2,7 @@
  * 数组在排序数组中出现的次数
  * 看见有序，进行二分查找
  */
-public class Solution {
+class Solution {
     public int GetNumberOfK(int[] nums, int K) {
         int first = binarySearch(nums, K);
         int last = binarySearch(nums, K + 1);
