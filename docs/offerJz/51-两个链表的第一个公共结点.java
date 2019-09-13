@@ -1,7 +1,7 @@
 /**
  * 两个链表的公共结点
  */
-public class Solution{
+class Solution{
     // 找出长度差
     public void solution(ListNode node1,ListNode node2){
         int len1 = 0;
@@ -25,8 +25,8 @@ public class Solution{
     // 循环找出两个
     public void solution2(ListNode p1,ListNode p2){
         while(p1!=p2){
-            p1 = (p1==NULL ? pHead2 : p1->next);
-            p2 = (p2==NULL ? pHead1 : p2->next);
+            p1 = (p1== null ? p2 : p1.next);
+            p2 = (p2== null ? p1 : p2.next);
         }
         System.out.println(p1);
     }

@@ -66,5 +66,21 @@
                 res.append(c);
         }
         return res.toString();
-    }    
+    }
+    public void isValid(String s) {
+        Stack<Character> stack = new Stack<Character>();
+        int len = s.length;
+        if (len == 0) {
+            return true;
+        }
+        for (int i = 0; i < s.length(); i++) {
+            if (s.charAt(i) == '(' || s.charAt(i) == '[' || s.charAt(i) == '{') {
+                stack.push(val);
+            }
+            if ((s.charAt(i) == '(' || s.charAt(i) == '[' || s.charAt(i) == '{') && stack.pop() != map.get(s.charAt(i))) {
+                return false;
+            }
+        }
+        return stack.isEmpty();
+    }   
  }
